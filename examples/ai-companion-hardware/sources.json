@@ -1,0 +1,18 @@
+{
+  "note": "All companies, institutions, outlets and figures in this example are fictional.",
+  "sources": [
+    {"id": "S-01", "title": "「星芽」完成 5000 万元 Pre-A 轮融资", "origin": "news", "published": "2026-07-12", "ref": "示例科技媒体", "entities": ["星芽"], "event": "financing"},
+    {"id": "S-02", "title": "「星芽」商业计划书（2026-06 版）", "origin": "bp", "published": "2026-06-20", "ref": "项目方提供", "entities": ["星芽"], "event": "company_claim"},
+    {"id": "S-03", "title": "「澄心」工商变更记录：新增股东示例产业资本 β", "origin": "filing", "published": "2026-08-05", "ref": "企业信用信息公示（示例）", "entities": ["澄心"], "event": "financing"},
+    {"id": "S-04", "title": "「澄心」官网产品页", "origin": "official", "published": "2026-05-18", "ref": "公司官网（示例）", "entities": ["澄心"], "event": "product"},
+    {"id": "S-05", "title": "群聊截图：「栖语」在谈 A 轮", "origin": "screenshot", "published": "2026-09-02", "ref": "reviewer 提供", "entities": ["栖语"], "event": "financing"},
+    {"id": "S-06", "title": "自媒体文章：AI 录音卡上半年出货量", "origin": "media", "published": "2026-08-21", "ref": "示例自媒体", "entities": [], "event": "market"},
+    {"id": "S-07", "title": "「回声」创始人访谈纪要", "origin": "interview", "published": "2026-09-10", "ref": "访谈记录（虚构）", "entities": ["回声"], "event": "financing"},
+    {"id": "S-08", "title": "「脉知」完成 800 万元天使轮融资", "origin": "news", "published": "2026-03-30", "ref": "示例科技媒体", "entities": ["脉知"], "event": "financing"},
+    {"id": "S-09", "title": "「拾光」完成 A 轮融资", "origin": "news", "published": "2026-10-15", "ref": "示例科技媒体", "entities": ["拾光"], "event": "financing"},
+    {"id": "S-10", "title": "「拾光」官网与众筹页", "origin": "official", "published": "2026-04-02", "ref": "公司官网（示例）", "entities": ["拾光"], "event": "product"},
+    {"id": "S-11", "title": "「栖语」产品评测视频", "origin": "media", "published": null, "ref": "示例视频平台", "entities": ["栖语"], "event": "product"},
+    {"id": "S-12", "title": "「星芽」官方账号：完成 Pre-A 轮融资", "origin": "official", "published": "2026-07-12", "ref": "公司官方账号（示例）", "entities": ["星芽"], "event": "financing"},
+    {"id": "S-13", "title": "「童伴」儿童 AI 学习机完成天使轮", "origin": "news", "published": "2026-08-30", "ref": "示例科技媒体", "entities": ["童伴"], "event": "financing"}
+  ]
+}

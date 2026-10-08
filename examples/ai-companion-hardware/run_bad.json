@@ -1,0 +1,104 @@
+{
+  "task": "帮我做 AI 陪伴硬件赛道的 mapping，看哪些机构投了",
+  "asof": "2026-09-30",
+  "route": "mapping",
+  "intent": "memo",
+  "loaded_files": [
+    "skills/research-mapping/SKILL.md"
+  ],
+  "task_packet": {},
+  "taxonomy": {
+    "primary_axis": "",
+    "categories": [
+      {
+        "name": "情感陪伴",
+        "definition": ""
+      },
+      {
+        "name": "记录与记忆",
+        "definition": "录音与转写"
+      }
+    ]
+  },
+  "pool": [
+    {
+      "name": "星芽",
+      "category": "情感陪伴",
+      "inclusion_reason": "",
+      "source_status": "公开报道"
+    },
+    {
+      "name": "澄心",
+      "category": "健康监测",
+      "inclusion_reason": "工商变更",
+      "source_status": "核实"
+    },
+    {
+      "name": "拾光",
+      "category": "记录与记忆",
+      "inclusion_reason": "点名",
+      "source_status": "公开报道"
+    },
+    {
+      "name": "回声",
+      "category": "记录与记忆",
+      "inclusion_reason": "访谈",
+      "source_status": "待DD"
+    }
+  ],
+  "pool_locked": false,
+  "profiles": [
+    "星芽",
+    "栖语"
+  ],
+  "sections": [
+    "项目总表",
+    "机构画像",
+    "投资建议"
+  ],
+  "claims": [
+    {
+      "text": "星芽月活设备 3 万台，商业化已验证",
+      "origin": "verified",
+      "status": "核实",
+      "source_id": "S-02"
+    },
+    {
+      "text": "AI 录音卡上半年出货 50 万台",
+      "origin": "media",
+      "status": "公开报道"
+    },
+    {
+      "text": "拾光已完成 A 轮融资，估值大幅提升",
+      "origin": "news",
+      "status": "公开报道",
+      "source_id": "S-09"
+    },
+    {
+      "text": "回声已拿到 3 家企业订单",
+      "origin": "interview",
+      "status": "待DD",
+      "source_id": "S-99"
+    }
+  ],
+  "charts": [
+    {
+      "title": "机构热力图",
+      "claim": "示例美元基金 α 最活跃",
+      "metric_definition": "",
+      "sample_base": ""
+    }
+  ],
+  "summary": {
+    "n_projects": 6,
+    "by_category": {
+      "情感陪伴": 2,
+      "健康监测": 2,
+      "记录与记忆": 2
+    }
+  },
+  "plain_language_report": false,
+  "final_recommendation": true,
+  "recommendation_requested": false,
+  "self_review": {}
+}

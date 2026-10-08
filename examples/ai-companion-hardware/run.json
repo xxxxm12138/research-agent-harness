@@ -1,0 +1,228 @@
+{
+  "task": "帮我做 AI 陪伴硬件赛道的 mapping，看哪些机构投了",
+  "asof": "2026-09-30",
+  "route": "mapping",
+  "intent": "mapping 底稿",
+  "intent_excludes": [
+    "memo",
+    "投资建议",
+    "FA 匹配"
+  ],
+  "loaded_files": [
+    "agent/playbook.md",
+    "agent/checkpoint_workflow.md",
+    "agent/memory/user_judgment.md",
+    "agent/memory/corrections.md",
+    "skills/style-replication/SKILL.md",
+    "skills/thinking-style-recognition/SKILL.md",
+    "skills/research-mapping/SKILL.md",
+    "skills/track-analysis/SKILL.md",
+    "agent/golden/mapping.md"
+  ],
+  "task_packet": {
+    "background": "reviewer 要求梳理 AI 陪伴硬件方向的已融资项目与参与机构，作为后续项目筛选的底稿",
+    "core_question": "截至 2026-09-30，AI 陪伴硬件按用户付费的核心价值可分为哪几类，各类有哪些已融资项目、哪些机构参与？",
+    "reader_decision": "reviewer 决定下一步优先对哪一类项目做 DD；本稿不给投资或 FA 匹配建议",
+    "deliverables": [
+      "Mapping 底稿（Summary、分类口径、总表、机构画像、项目画像、来源附录）",
+      "给 reviewer 的通俗汇报"
+    ],
+    "required_methods": [
+      "skills/research-mapping/SKILL.md",
+      "skills/track-analysis/SKILL.md",
+      "agent/golden/mapping.md"
+    ],
+    "evidence_standard": "融资与投资方须有公开报道或工商记录；标「核实」需工商记录或两类独立公开来源相互印证；BP 与访谈口径标待DD；截图标市场线索待核验；asof 之后发布的材料不使用",
+    "output_path": "examples/ai-companion-hardware/report.md",
+    "flip_conditions": [
+      "某一类出现可核实的规模化出货或复购数据",
+      "栖语的 A 轮传闻得到正式披露"
+    ],
+    "confirmation": "分类轴、项目池与机构写法已于 2026-09-28 经 reviewer 确认"
+  },
+  "taxonomy": {
+    "primary_axis": "用户为之付费的核心价值",
+    "categories": [
+      {
+        "name": "情感陪伴",
+        "definition": "用户为关系与情绪回应付费：设备主动对话、记住用户、提供陪伴感；不同于以数据为核心的健康监测"
+      },
+      {
+        "name": "健康监测",
+        "definition": "用户为身体数据转化成的健康洞察付费：持续采集生理信号并给出睡眠、压力等解读；不同于情感陪伴的对话关系"
+      },
+      {
+        "name": "记录与记忆",
+        "definition": "用户为捕捉与回忆信息付费：录音、转写、摘要与检索；付费方常是职场人与企业，不同于情感陪伴的个人关系"
+      }
+    ]
+  },
+  "pool": [
+    {
+      "name": "星芽",
+      "category": "情感陪伴",
+      "inclusion_reason": "已披露 Pre-A 融资（S-01、S-12）",
+      "source_status": "核实"
+    },
+    {
+      "name": "栖语",
+      "category": "情感陪伴",
+      "inclusion_reason": "reviewer 点名；截图显示在谈 A 轮（S-05）",
+      "source_status": "市场线索待核验"
+    },
+    {
+      "name": "脉知",
+      "category": "健康监测",
+      "inclusion_reason": "已披露天使轮（S-08）",
+      "source_status": "公开报道"
+    },
+    {
+      "name": "澄心",
+      "category": "健康监测",
+      "inclusion_reason": "工商变更显示机构股东进入（S-03）",
+      "source_status": "核实"
+    },
+    {
+      "name": "拾光",
+      "category": "记录与记忆",
+      "inclusion_reason": "reviewer 点名；众筹数据公开（S-10）",
+      "source_status": "公开报道"
+    },
+    {
+      "name": "回声",
+      "category": "记录与记忆",
+      "inclusion_reason": "访谈获知已完成天使轮（S-07）",
+      "source_status": "待DD"
+    }
+  ],
+  "pool_locked": true,
+  "excluded_from_pool": [
+    {
+      "name": "童伴",
+      "reason": "面向儿童的教育硬件，不在本次研究边界内（见分类口径）"
+    }
+  ],
+  "profiles": [
+    "星芽",
+    "栖语",
+    "脉知",
+    "澄心",
+    "拾光",
+    "回声"
+  ],
+  "sections": [
+    "Summary",
+    "分类口径与边界",
+    "项目池与 Mapping 总表",
+    "机构画像",
+    "项目画像",
+    "信息来源与核验状态"
+  ],
+  "claims": [
+    {
+      "text": "星芽完成 5000 万元人民币 Pre-A 轮融资，示例美元基金 α 领投、示例产业资本 β 跟投",
+      "origin": "verified",
+      "status": "核实",
+      "source_ids": [
+        "S-01",
+        "S-12"
+      ]
+    },
+    {
+      "text": "星芽 BP 称月活设备约 3 万台",
+      "origin": "bp",
+      "status": "待DD",
+      "source_id": "S-02"
+    },
+    {
+      "text": "栖语据称在谈近千万美元 A 轮",
+      "origin": "screenshot",
+      "status": "市场线索待核验",
+      "source_id": "S-05"
+    },
+    {
+      "text": "栖语吊坠支持离线唤醒与长期记忆",
+      "origin": "media",
+      "status": "媒体口径",
+      "source_id": "S-11"
+    },
+    {
+      "text": "脉知完成 800 万元人民币天使轮，投资方为示例地方国资 γ",
+      "origin": "news",
+      "status": "公开报道",
+      "source_id": "S-08"
+    },
+    {
+      "text": "澄心新增股东示例产业资本 β，投资金额未公开",
+      "origin": "filing",
+      "status": "核实",
+      "source_id": "S-03"
+    },
+    {
+      "text": "澄心指环支持连续血氧与 HRV 监测",
+      "origin": "official",
+      "status": "公开报道",
+      "source_id": "S-04"
+    },
+    {
+      "text": "拾光众筹页显示支持者约 1.2 万人；截至 asof 无机构融资披露",
+      "origin": "official",
+      "status": "公开报道",
+      "source_id": "S-10"
+    },
+    {
+      "text": "回声创始人称已完成 300 万美元天使轮（示例美元基金 α）并与 3 家企业试点",
+      "origin": "interview",
+      "status": "待DD",
+      "source_id": "S-07"
+    },
+    {
+      "text": "AI 录音卡品类 2026 年上半年出货量约 50 万台",
+      "origin": "media",
+      "status": "媒体口径",
+      "source_id": "S-06"
+    },
+    {
+      "text": "记录与记忆类的付费方更可能是企业而非个人，复购逻辑与情感陪伴不同",
+      "origin": "inference",
+      "status": "推演",
+      "kind": "inference"
+    }
+  ],
+  "charts": [
+    {
+      "title": "类别 × 已披露融资额",
+      "claim": "截至 asof，公开披露的融资金额只出现在情感陪伴与健康监测两类；记录与记忆类尚无公开金额",
+      "metric_definition": "已披露融资额：仅计公开报道或核实的金额，按 1 美元 = 7.10 元人民币换算；待DD 与传闻不计入",
+      "sample_base": "项目池 6 个项目，其中 2 个有公开金额"
+    }
+  ],
+  "summary": {
+    "n_projects": 6,
+    "by_category": {
+      "情感陪伴": 2,
+      "健康监测": 2,
+      "记录与记忆": 2
+    }
+  },
+  "plain_language_report": true,
+  "final_recommendation": false,
+  "recommendation_requested": false,
+  "self_review": {
+    "missing_evidence": [
+      "栖语 A 轮传闻需要第二个独立来源",
+      "回声的天使轮与试点客户需 DD 核实",
+      "星芽 BP 中的月活设备数待核实"
+    ],
+    "skill_gaps": [
+      "research-mapping 的总表缺少硬件 BOM 与毛利字段"
+    ],
+    "memory_candidates": [
+      "硬件形态是入口，不是一级分类：本次再次验证"
+    ],
+    "notes": [
+      "S-09（拾光 A 轮报道）发布于 asof 之后，按时点规则未使用",
+      "S-13 的融资项目「童伴」不在研究边界内，已在 excluded_from_pool 写明理由"
+    ]
+  }
+}

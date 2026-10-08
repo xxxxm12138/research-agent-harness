@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local secrets and the private blocklist used by `irh scan`
+.env
+.sensitive-terms.txt
+
+# Raw agent runs and workspaces (curated, de-identified logs go to agent/runs/)
+/runs/
+
+# Confidential document types never belong in this repository
+*.pdf
+*.doc
+*.docx
+*.ppt
+*.pptx
+*.xls
+*.xlsx
+*.m4a
+*.mp3
+*.zip
+
+# OS / editors
+.DS_Store
+.idea/
+.vscode/

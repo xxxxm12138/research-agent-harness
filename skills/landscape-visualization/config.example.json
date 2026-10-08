@@ -1,0 +1,23 @@
+{
+  "ignore_investors": ["待 DD", "待DD", "NA", "nan", "", "上市公司内部投入"],
+  "canonical_investors": {},
+  "heatmap_focus_investors": [],
+  "heatmap_exclude_investors": [],
+  "short_labels": {},
+  "type_labels": {
+    "财务VC": "财务 VC",
+    "产业资本": "产业 / 战略",
+    "战略资本": "产业 / 战略",
+    "政府基金": "政府基金",
+    "国资": "政府基金",
+    "天使": "个人 / 天使",
+    "个人投资人": "个人 / 天使",
+    "大厂参照": "大厂参照"
+  },
+  "market_map": {
+    "x_by_category": {},
+    "y_by_sub_type": {},
+    "x_ticks": [],
+    "y_ticks": []
+  }
+}

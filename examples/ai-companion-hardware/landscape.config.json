@@ -1,0 +1,20 @@
+{
+  "ignore_investors": ["待 DD", "待DD", "NA", "nan", ""],
+  "canonical_investors": {},
+  "heatmap_focus_investors": ["示例地方国资 γ"],
+  "heatmap_exclude_investors": [],
+  "short_labels": {},
+  "market_map": {
+    "x_by_category": {"情感陪伴": 0.17, "健康监测": 0.5, "记录与记忆": 0.83},
+    "y_by_sub_type": {
+      "桌面陪伴机器人": 0.82,
+      "语音陪伴吊坠": 0.74,
+      "录音卡": 0.5,
+      "夹式录音设备": 0.56,
+      "压力手环": 0.3,
+      "睡眠指环": 0.22
+    },
+    "x_ticks": [[0.17, "情感陪伴"], [0.5, "健康监测"], [0.83, "记录与记忆"]],
+    "y_ticks": [[0.25, "被动采集"], [0.5, "按需调用"], [0.8, "主动对话"]]
+  }
+}

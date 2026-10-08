@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>__TITLE__</title>
+<style>
+  :root {
+    --paper: #f7faf7; --panel: #ffffff; --ink: #2f3a42; --muted: #6e7d86;
+    --line: #dce6e1; --blue: #7fa6c7; --teal: #7ab7b0; --green: #9cc7a5;
+    --yellow: #f1cf85; --orange: #e6a56f; --purple: #b7a6d8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--paper); color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+      "Microsoft YaHei", sans-serif;
+  }
+  .wrap { max-width: 1480px; margin: 0 auto; padding: 28px 32px 42px; }
+  header { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; }
+  h1 { margin: 0 0 8px; font-size: 30px; }
+  .subtitle { color: var(--muted); font-size: 14px; max-width: 640px; }
+  .controls {
+    display: grid; grid-template-columns: repeat(4, minmax(150px, 1fr)); gap: 10px;
+    padding: 12px; border: 1px solid var(--line); background: rgba(255, 255, 255, .72);
+    border-radius: 8px; min-width: 620px;
+  }
+  label { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--muted); }
+  select, input {
+    height: 34px; border: 1px solid var(--line); border-radius: 6px; padding: 0 10px;
+    background: #fff; color: var(--ink); font: inherit; font-size: 13px;
+  }
+  .kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 16px 0 18px; }
+  .kpi { background: #eef6f1; border: 1px solid #d7e5df; padding: 12px 16px; border-radius: 4px; }
+  .kpi .num { font-size: 25px; line-height: 1; }
+  .kpi .lab { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .grid { display: grid; grid-template-columns: 1.05fr 1.15fr 1.05fr; gap: 16px; }
+  .panel {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 8px;
+    padding: 14px 14px 12px; min-height: 320px; overflow: hidden;
+  }
+  .panel.wide { grid-column: span 2; }
+  .panel h2 { margin: 0 0 12px; font-size: 16px; }
+  svg { width: 100%; height: 260px; overflow: visible; }
+  .axis { stroke: #ccd9d4; stroke-width: 1; }
+  .gridline { stroke: #e8efec; stroke-width: 1; }
+  .tick { fill: var(--muted); font-size: 11px; }
+  .small { color: var(--muted); font-size: 12px; }
+  .tooltip {
+    position: fixed; pointer-events: none; z-index: 20; background: #fff;
+    border: 1px solid var(--line); box-shadow: 0 8px 30px rgba(43, 58, 64, .12);
+    border-radius: 7px; padding: 9px 10px; max-width: 280px; font-size: 12px; display: none;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th, td { border-bottom: 1px solid #e5eeea; padding: 7px 8px; text-align: left; vertical-align: top; }
+  th { background: #edf5f1; position: sticky; top: 0; z-index: 1; }
+  tbody tr { cursor: pointer; }
+  tbody tr:hover { background: #f2f7f4; }
+  .tablebox { max-height: 360px; overflow: auto; border: 1px solid var(--line); border-radius: 6px; }
+  .detail { line-height: 1.65; font-size: 13px; }
+  .badge {
+    display: inline-block; padding: 2px 7px; border-radius: 999px; background: #edf5f1;
+    margin: 2px 4px 2px 0; color: #46625b;
+  }
+  @media (max-width: 1100px) {
+    header { flex-direction: column; }
+    .controls { min-width: 0; width: 100%; grid-template-columns: 1fr 1fr; }
+    .grid { grid-template-columns: 1fr; }
+    .panel.wide { grid-column: span 1; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>__TITLE__</h1>
+      <div class="subtitle">
+        交互维度：项目分类、融资额、机构参与、轮次、资金属性。金额统计仅包含公开披露或可换算的项目；
+        待 DD、传闻与用户线索不计入金额合计。
+      </div>
+    </div>
+    <div class="controls">
+      <label>一级分类<select id="category"></select></label>
+      <label>地域<select id="region"></select></label>
+      <label>资金属性<select id="itype"></select></label>
+      <label>搜索项目 / 机构<input id="search" placeholder="项目名或机构名" /></label>
+    </div>
+  </header>
+
+  <section class="kpis" id="kpis"></section>
+  <section class="grid">
+    <div class="panel"><h2>A. 类别项目数与已披露融资额</h2><svg id="categoryBars"></svg></div>
+    <div class="panel">
+      <h2>B. 项目融资分布</h2><svg id="scatter"></svg>
+      <div class="small">横轴为融资金额 $M（对数轴）；未知金额不展示。</div>
+    </div>
+    <div class="panel">
+      <h2>C. 机构参与方向分布</h2><svg id="heatmap"></svg>
+      <div class="small">数字 = 参与项目数；入选规则：参与数前 10 + 配置中的关注名单。</div>
+    </div>
+    <div class="panel"><h2>D. 机构参与项目数</h2><svg id="investorBars"></svg></div>
+    <div class="panel"><h2>E. 资金属性分布</h2><svg id="typeBars"></svg></div>
+    <div class="panel">
+      <h2>F. 项目详情</h2>
+      <div id="detail" class="detail small">点击下方项目表或图中点位查看详情。</div>
+    </div>
+    <div class="panel wide"><h2>G. 二维市场地图</h2><svg id="marketMap"></svg></div>
+    <div class="panel">
+      <h2>H. 样本项目表</h2>
+      <div class="tablebox">
+        <table>
+          <thead><tr><th>项目</th><th>分类</th><th>轮次</th><th>金额</th><th>状态</th></tr></thead>
+          <tbody id="projectRows"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+<div class="tooltip" id="tooltip"></div>
+
+<script id="landscape-data" type="application/json">__DATA__</script>
+<script>
+"use strict";
+const payload = JSON.parse(document.getElementById("landscape-data").textContent);
+const records = payload.records;
+const ALL = "全部";
+const SVG_NS = "http://www.w3.org/2000/svg";
+const colors = {
+  blue: "#7fa6c7", teal: "#7ab7b0", green: "#9cc7a5", yellow: "#f1cf85",
+  orange: "#e6a56f", purple: "#b7a6d8", gray: "#aeb7c2",
+};
+const series = [colors.blue, colors.green, colors.yellow, colors.purple, colors.orange, colors.teal];
+const regionColor = { "国内": colors.green, "海外": colors.blue, "大厂参照": colors.yellow };
+const focusList = payload.focus || [];
+const excludeSet = new Set(payload.exclude || []);
+const shortLabels = payload.shortLabels || {};
+const state = { category: ALL, region: ALL, itype: ALL, search: "" };
+
+const byId = id => document.getElementById(id);
+const uniq = arr => [...new Set(arr.filter(Boolean))];
+const hasMoney = d => typeof d.amount_usd_m === "number" && Number.isFinite(d.amount_usd_m);
+const ESCAPES = { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" };
+const esc = s => String(s ?? "").replace(/[&<>"']/g, ch => ESCAPES[ch]);
+const short = (s, n = 18) => {
+  const t = shortLabels[s] || String(s ?? "");
+  return t.length > n ? t.slice(0, n - 1) + "…" : t;
+};
+const allCategories = uniq(records.map(d => d.category));
+const catColor = cat => series[Math.max(0, allCategories.indexOf(cat)) % series.length];
+const hash = s => {
+  let h = 0;
+  for (const ch of String(s)) h = (h * 31 + ch.codePointAt(0)) >>> 0;
+  return h;
+};
+const jitter = (key, span) => ((hash(key) % 1000) / 1000 - 0.5) * span;
+
+function setOptions(id, values) {
+  const el = byId(id);
+  el.innerHTML = [ALL, ...values]
+    .map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join("");
+  el.onchange = e => { state[id] = e.target.value; render(); };
+}
+
+function filtered() {
+  const q = state.search.trim().toLowerCase();
+  return records.filter(d => {
+    if (state.category !== ALL && d.category !== state.category) return false;
+    if (state.region !== ALL && d.region !== state.region) return false;
+    if (state.itype !== ALL && !(d.investor_type_list || []).includes(state.itype)) return false;
+    if (!q) return true;
+    const text = [d.project, d.category, d.sub_type, d.stage, d.amount_label,
+      d.investors, d.lead_investors, d.investor_types].join(" ").toLowerCase();
+    return text.includes(q);
+  });
+}
+
+function showTip(htmlText, e) {
+  const tip = byId("tooltip");
+  tip.innerHTML = htmlText;
+  tip.style.left = Math.min(e.clientX + 14, window.innerWidth - 310) + "px";
+  tip.style.top = (e.clientY + 14) + "px";
+  tip.style.display = "block";
+}
+function hideTip() { byId("tooltip").style.display = "none"; }
+
+function badges(list) {
+  return (list || []).map(x => `<span class="badge">${esc(x)}</span>`).join("") || "待 DD";
+}
+function showDetail(d) {
+  byId("detail").innerHTML = `
+    <h3 style="margin:0 0 8px">${esc(d.project)}</h3>
+    <div><b>分类：</b>${esc(d.category)}</div>
+    <div><b>产品形态：</b>${esc(d.sub_type || "待 DD")}</div>
+    <div><b>地域：</b>${esc(d.region || "待 DD")}</div>
+    <div><b>轮次 / 金额：</b>${esc(d.stage || "待 DD")}；${esc(d.amount_label || "待 DD")}</div>
+    <div><b>投资方：</b>${badges(d.investor_list)}</div>
+    <div><b>领投 / 主要机构：</b>${esc(d.lead_investors || "待 DD")}</div>
+    <div><b>资金属性：</b>${badges(d.investor_type_list)}</div>
+    <div><b>信息状态：</b>${esc(d.source_status || "待 DD")}</div>`;
+}
+
+function svg(id, w, h) {
+  const el = byId(id);
+  el.innerHTML = "";
+  el.setAttribute("viewBox", `0 0 ${w} ${h}`);
+  return el;
+}
+function node(parent, tag, attrs) {
+  const e = document.createElementNS(SVG_NS, tag);
+  for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+  parent.appendChild(e);
+  return e;
+}
+function line(p, x1, y1, x2, y2, cls = "gridline") { return node(p, "line", { x1, y1, x2, y2, class: cls }); }
+function rect(p, x, y, width, height, fill) { return node(p, "rect", { x, y, width, height, fill }); }
+function text(p, x, y, value, anchor = "start") {
+  const e = node(p, "text", { x, y, class: "tick", "text-anchor": anchor });
+  e.textContent = value;
+  return e;
+}
+function dot(p, x, y, r, fill, d) {
+  const e = node(p, "circle", {
+    cx: x, cy: y, r, fill, opacity: ".85", stroke: "#fff", "stroke-width": "1.4",
+  });
+  const tip = `<b>${esc(d.project)}</b><br>${esc(d.category)}<br>` +
+    `${esc(d.stage || "待 DD")}；${esc(d.amount_label || "待 DD")}<br>${esc(d.source_status)}`;
+  e.onmousemove = ev => showTip(tip, ev);
+  e.onmouseleave = hideTip;
+  e.onclick = () => showDetail(d);
+  return e;
+}
+
+function renderKpis(data) {
+  const investors = uniq(data.flatMap(d => d.investor_list || []));
+  const known = data.filter(hasMoney);
+  const sum = known.reduce((a, d) => a + d.amount_usd_m, 0);
+  const kpis = [
+    ["项目样本", data.length],
+    ["一级分类", uniq(data.map(d => d.category)).length],
+    ["机构 / 投资方", investors.length],
+    ["有公开金额项目", known.length],
+    ["已披露金额合计", "$" + sum.toFixed(1) + "M"],
+  ];
+  byId("kpis").innerHTML = kpis.map(([lab, num]) =>
+    `<div class="kpi"><div class="num">${esc(num)}</div><div class="lab">${esc(lab)}</div></div>`
+  ).join("");
+}
+
+function renderCategoryBars(data) {
+  const W = 520, H = 260, L = 120, R = 40, T = 12, B = 28;
+  const s = svg("categoryBars", W, H);
+  const rows = uniq(data.map(d => d.category)).map(cat => {
+    const part = data.filter(d => d.category === cat);
+    return { cat, count: part.length, amount: part.filter(hasMoney).reduce((a, d) => a + d.amount_usd_m, 0) };
+  });
+  const maxCount = Math.max(1, ...rows.map(r => r.count));
+  const maxAmount = Math.max(1, ...rows.map(r => r.amount));
+  const rowH = (H - T - B) / Math.max(1, rows.length);
+  const barH = Math.min(24, rowH / 2 - 4);
+  rows.forEach((r, i) => {
+    const y = T + i * rowH;
+    text(s, 0, y + barH + 4, short(r.cat, 15));
+    const w1 = (W - L - R) * r.count / maxCount, w2 = (W - L - R) * r.amount / maxAmount;
+    rect(s, L, y, w1, barH, colors.teal);
+    rect(s, L, y + barH + 4, w2, barH, colors.yellow);
+    text(s, L + w1 + 6, y + barH - 6, String(r.count));
+    text(s, L + w2 + 6, y + 2 * barH - 2, "$" + r.amount.toFixed(1) + "M");
+  });
+  text(s, L, H - 6, "青：项目数　黄：已披露融资额");
+}
+
+function renderScatter(data) {
+  const W = 520, H = 260, L = 92, R = 26, T = 24, B = 36;
+  const s = svg("scatter", W, H);
+  const known = data.filter(hasMoney).sort((a, b) => a.amount_usd_m - b.amount_usd_m);
+  if (!known.length) { text(s, W / 2, H / 2, "无公开金额", "middle"); return; }
+  const cats = uniq(known.map(d => d.category));
+  const max = Math.max(10, ...known.map(d => d.amount_usd_m));
+  const x = v => L + (Math.log10(v + 1) / Math.log10(max + 1)) * (W - L - R);
+  const y = cat => T + cats.indexOf(cat) * (H - T - B) / Math.max(1, cats.length - 1);
+  [1, 10, 100, 1000].filter(v => v <= max).forEach(v => {
+    line(s, x(v), T, x(v), H - B);
+    text(s, x(v), H - 10, String(v), "middle");
+  });
+  cats.forEach(cat => text(s, 2, y(cat) + 4, short(cat, 12)));
+  known.forEach(d => {
+    const r = Math.max(5, Math.min(24, Math.sqrt(d.amount_usd_m) * 2.1));
+    const cy = y(d.category) + jitter(d.project, 28);
+    dot(s, x(d.amount_usd_m), cy, r, catColor(d.category), d);
+    text(s, x(d.amount_usd_m) + r + 3, cy + 3, short(d.project, 12));
+  });
+}
+
+function renderHeatmap(data) {
+  const W = 520, L = 130, R = 20, T = 22, B = 45;
+  const cats = uniq(data.map(d => d.category));
+  const counts = {};
+  data.forEach(d => (d.investor_list || []).forEach(i => { counts[i] = (counts[i] || 0) + 1; }));
+  const rank = name => (focusList.includes(name) ? focusList.indexOf(name) : focusList.length);
+  const ranked = Object.keys(counts).filter(name => !excludeSet.has(name))
+    .sort((a, b) => counts[b] - counts[a] || rank(a) - rank(b) || a.localeCompare(b, "zh-CN"));
+  const focused = focusList.filter(name => counts[name] && !excludeSet.has(name));
+  const investors = uniq([...ranked.slice(0, 10), ...focused]).slice(0, 22);
+  const H = Math.max(260, T + B + investors.length * 24);
+  const s = svg("heatmap", W, H);
+  s.style.height = `${H}px`;
+  if (!investors.length || !cats.length) { text(s, W / 2, H / 2, "无机构数据", "middle"); return; }
+  const cellW = (W - L - R) / cats.length, cellH = (H - T - B) / investors.length;
+  cats.forEach((c, j) => text(s, L + j * cellW + cellW / 2, H - 14, short(c, 11), "middle"));
+  investors.forEach((inv, i) => {
+    text(s, L - 8, T + i * cellH + cellH * 0.62, short(inv, 18), "end");
+    cats.forEach((cat, j) => {
+      const n = data.filter(d => d.category === cat && (d.investor_list || []).includes(inv)).length;
+      rect(s, L + j * cellW, T + i * cellH, cellW - 2, cellH - 2, n ? (n > 1 ? "#2E7FAA" : "#80C9BF") : "#F3F7F4");
+      if (n) {
+        const label = text(s, L + j * cellW + cellW / 2, T + i * cellH + cellH * 0.62, String(n), "middle");
+        label.style.fill = n >= 2 ? "#ffffff" : "#2f3a42";
+        label.style.fontWeight = "700";
+      }
+    });
+  });
+}
+
+function renderBars(id, counts, palette) {
+  const W = 520, H = 260, L = 130, R = 30, T = 18, B = 28;
+  const s = svg(id, W, H);
+  const rows = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10).reverse();
+  if (!rows.length) { text(s, W / 2, H / 2, "无数据", "middle"); return; }
+  const max = Math.max(1, ...rows.map(r => r[1]));
+  const rowH = (H - T - B) / rows.length;
+  rows.forEach(([name, val], i) => {
+    const y = T + i * rowH, w = (W - L - R) * val / max;
+    text(s, L - 8, y + 14, short(name, 18), "end");
+    rect(s, L, y, w, Math.min(20, rowH - 4), palette[i % palette.length]);
+    text(s, L + w + 6, y + 14, String(val));
+  });
+}
+
+function renderInvestorBars(data) {
+  const counts = {};
+  data.forEach(d => (d.investor_list || []).forEach(i => { counts[i] = (counts[i] || 0) + 1; }));
+  renderBars("investorBars", counts, [colors.blue]);
+}
+
+function renderTypeBars(data) {
+  const counts = {};
+  data.forEach(d => (d.investor_type_list || []).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  renderBars("typeBars", counts, [colors.orange, colors.purple, colors.yellow, colors.green, colors.blue]);
+}
+
+function renderMarketMap(data) {
+  const W = 760, H = 260, L = 72, R = 28, T = 18, B = 34;
+  const s = svg("marketMap", W, H);
+  const px = v => L + (W - L - R) * v;
+  const py = v => T + (H - T - B) * (1 - v);
+  line(s, L, T, L, H - B, "axis");
+  line(s, L, H - B, W - R, H - B, "axis");
+  (payload.xTicks || []).forEach(([pos, label]) => {
+    line(s, px(pos), T, px(pos), H - B);
+    text(s, px(pos), H - 10, short(label, 16), "middle");
+  });
+  (payload.yTicks || []).forEach(([pos, label]) => {
+    line(s, L, py(pos), W - R, py(pos));
+    text(s, 4, py(pos) + 4, short(label, 8));
+  });
+  data.forEach(d => {
+    const xv = (payload.xMap[d.category] ?? 0.5) + jitter(d.project, 0.08);
+    const yv = (payload.yMap[d.sub_type] ?? 0.5) + jitter(d.project + "/y", 0.06);
+    const fill = regionColor[d.region] || colors.gray;
+    dot(s, px(xv), py(yv), 6, fill, d);
+    text(s, px(xv) + 8, py(yv) + 4, short(d.project, 14));
+  });
+}
+
+function renderRows(data) {
+  byId("projectRows").innerHTML = data.map(d => `
+    <tr data-i="${records.indexOf(d)}">
+      <td>${esc(d.project)}</td><td>${esc(short(d.category, 12))}</td>
+      <td>${esc(d.stage || "待 DD")}</td><td>${esc(d.amount_label || "待 DD")}</td>
+      <td>${esc(d.source_status || "待 DD")}</td>
+    </tr>`).join("");
+  byId("projectRows").querySelectorAll("tr").forEach(tr => {
+    tr.onclick = () => showDetail(records[Number(tr.dataset.i)]);
+  });
+}
+
+function render() {
+  const data = filtered();
+  renderKpis(data); renderCategoryBars(data); renderScatter(data); renderHeatmap(data);
+  renderInvestorBars(data); renderTypeBars(data); renderMarketMap(data); renderRows(data);
+  if (data[0]) showDetail(data[0]); else byId("detail").textContent = "无匹配项目";
+}
+
+setOptions("category", allCategories);
+setOptions("region", uniq(records.map(d => d.region)));
+setOptions("itype", uniq(records.flatMap(d => d.investor_type_list || [])));
+byId("search").oninput = e => { state.search = e.target.value; render(); };
+render();
+</script>
+</body>
+</html>
