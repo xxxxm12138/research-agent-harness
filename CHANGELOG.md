@@ -1,5 +1,15 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- README visuals in `assets/readme/`: hero, gate-check proof board, task pipeline and information-status ladder (static SVG, system fonts).
+
+### Changed
+
+- `irh validate` also checks the `src` / `href` targets of HTML tags in markdown, so README images cannot dangle.
+
 ## 0.1.0 — 2026-10-08
 
 First public version, restructured from a private research workspace.

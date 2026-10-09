@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">同一任务，两份 run record：8 道流程关口的检查结果</title>
+  <desc id="desc">虚构示例 ai-companion-hardware 的 irh check 输出摘要。合格的 run.json 通过全部 8 道关口；故意犯错的 run_bad.json 8 道全部失败：没有 Task Packet；意图判成 memo；有融资事件的项目既未入池也未排除；没有单一分类主轴；只引 BP 却标「核实」；引用 asof 之后发布的来源；图表缺口径；摘要数字与总表不一致。结论是回到检查点 1。</desc>
+
+  <rect width="1200" height="760" rx="24" fill="#F5F2EA"/>
+
+  <!-- heading -->
+  <text x="64" y="58" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63" letter-spacing="1.5">PROOF · examples/ai-companion-hardware（虚构）</text>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+    <text x="64" y="106" font-size="34" font-weight="700" fill="#1B1E24">同一任务，两份 run record</text>
+    <text x="64" y="144" font-size="20" fill="#3A3F47">irh check 的输出摘要：合格的一份 8 道关口全过，故意犯错的一份 8 道全挂，每条都写明原因。</text>
+  </g>
+
+  <!-- column tints -->
+  <rect x="312" y="176" width="140" height="568" fill="#E7EFE9"/>
+  <rect x="460" y="176" width="676" height="568" fill="#F7EAE5"/>
+
+  <!-- column headers -->
+  <path d="M64 176H1136" stroke="#1B1E24" stroke-width="1.5"/>
+  <text x="64" y="208" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="18" fill="#6E6B63">关口</text>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="18" font-weight="700" fill="#1B1E24">
+    <text x="330" y="208">run.json</text>
+    <text x="480" y="208">run_bad.json</text>
+  </g>
+  <path d="M64 224H1136" stroke="#D6CFC0" stroke-width="1.5"/>
+
+  <!-- row separators -->
+  <g stroke="#DDD6C8" stroke-width="1">
+    <path d="M64 282H1136"/><path d="M64 340H1136"/><path d="M64 398H1136"/><path d="M64 456H1136"/>
+    <path d="M64 514H1136"/><path d="M64 572H1136"/><path d="M64 630H1136"/>
+  </g>
+  <path d="M64 688H1136" stroke="#1B1E24" stroke-width="1.5"/>
+
+  <defs>
+    <path id="pass" d="M-9 0l6 6 12-13" fill="none" stroke="#2E6B4E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <path id="fail" d="M-7-7L7 7M7-7L-7 7" fill="none" stroke="#B23A2B" stroke-width="3" stroke-linecap="round"/>
+  </defs>
+
+  <!-- gate names -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="20" font-weight="700" fill="#1B1E24">
+    <text x="64" y="250">任务说明</text>
+    <text x="64" y="308">意图对齐</text>
+    <text x="64" y="366">项目池</text>
+    <text x="64" y="424">分类口径</text>
+    <text x="64" y="482">证据与标签</text>
+    <text x="64" y="540">时点</text>
+    <text x="64" y="598">图表口径</text>
+    <text x="64" y="656">摘要一致</text>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63">
+    <text x="64" y="271">task_packet</text>
+    <text x="64" y="329">intent</text>
+    <text x="64" y="387">sample_pool</text>
+    <text x="64" y="445">taxonomy</text>
+    <text x="64" y="503">evidence</text>
+    <text x="64" y="561">point_in_time</text>
+    <text x="64" y="619">visualization</text>
+    <text x="64" y="677">summary_consistency</text>
+  </g>
+
+  <!-- run.json: all pass -->
+  <g id="run-good">
+    <use href="#pass" x="344" y="253"/><use href="#pass" x="344" y="311"/>
+    <use href="#pass" x="344" y="369"/><use href="#pass" x="344" y="427"/>
+    <use href="#pass" x="344" y="485"/><use href="#pass" x="344" y="543"/>
+    <use href="#pass" x="344" y="601"/><use href="#pass" x="344" y="659"/>
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="20" fill="#2E6B4E">
+      <text x="364" y="260">通过</text><text x="364" y="318">通过</text>
+      <text x="364" y="376">通过</text><text x="364" y="434">通过</text>
+      <text x="364" y="492">通过</text><text x="364" y="550">通过</text>
+      <text x="364" y="608">通过</text><text x="364" y="666">通过</text>
+    </g>
+  </g>
+
+  <!-- run_bad.json: all fail, with the reason -->
+  <g id="run-bad">
+    <use href="#fail" x="492" y="253"/><use href="#fail" x="492" y="311"/>
+    <use href="#fail" x="492" y="369"/><use href="#fail" x="492" y="427"/>
+    <use href="#fail" x="492" y="485"/><use href="#fail" x="492" y="543"/>
+    <use href="#fail" x="492" y="601"/><use href="#fail" x="492" y="659"/>
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="20" fill="#1B1E24">
+      <text x="514" y="260">长文产出前没有 Task Packet</text>
+      <text x="514" y="318">意图判成 memo，未排除相邻意图，还夹带了投资建议</text>
+      <text x="514" y="376">有融资事件的栖语、脉知、童伴既未入池，也没写排除理由</text>
+      <text x="514" y="434">没有单一分类主轴；「情感陪伴」没有定义</text>
+      <text x="514" y="492">只引 BP 却标「核实」（上限是「待DD」）；引用了不存在的 S-99</text>
+      <text x="514" y="550">引用 2026-10-15 发布的 S-09，晚于 asof（后视泄露）</text>
+      <text x="514" y="608">机构热力图缺指标定义与样本口径</text>
+      <text x="514" y="666">摘要写 6 个项目，总表只有 4 个</text>
+    </g>
+  </g>
+
+  <!-- totals -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="20" font-weight="700">
+    <text x="330" y="724" fill="#2E6B4E">8/8 通过</text>
+    <text x="480" y="724" fill="#B23A2B">8/8 失败 → 回到检查点 1：任务理解</text>
+  </g>
+</svg>

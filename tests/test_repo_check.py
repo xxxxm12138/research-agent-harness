@@ -39,6 +39,27 @@ def test_dangling_reference_detection(tmp_path):
     ]
 
 
+def test_html_image_and_link_targets_are_checked(tmp_path):
+    (tmp_path / "assets").mkdir()
+    (tmp_path / "assets" / "hero.svg").write_text("<svg/>", encoding="utf-8")
+    (tmp_path / "README.md").write_text(
+        '<p align="center">\n'
+        '  <img src="./assets/hero.svg" alt="ok">\n'
+        "  <img\n"
+        '    src="./assets/missing.svg" alt="spans two lines">\n'
+        '  <a href="LICENSE"><img src="https://example.com/badge.svg" alt="badge"></a>\n'
+        '  <a href="#quick-start">anchor</a>\n'
+        "</p>\n"
+        "see `assets/hero.svg` and `assets/nope.svg`\n",
+        encoding="utf-8",
+    )
+    assert [str(p) for p in dangling_references(tmp_path)] == [
+        "README.md:4: dangling reference: ./assets/missing.svg",
+        "README.md:5: dangling reference: LICENSE",
+        "README.md:8: dangling reference: assets/nope.svg",
+    ]
+
+
 def test_skill_without_frontmatter(tmp_path):
     skill = tmp_path / "skills" / "x" / "SKILL.md"
     skill.parent.mkdir(parents=True)

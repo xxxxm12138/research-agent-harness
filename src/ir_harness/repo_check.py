@@ -2,7 +2,8 @@
 
 Documentation is configuration here, so it gets the same treatment as code:
 
-- every path a markdown file names (in backticks or as a relative link) must exist;
+- every path a markdown file names (in backticks, as a relative link, or as the ``src`` /
+  ``href`` of an HTML tag such as a README image) must exist;
 - every Skill has frontmatter with ``name`` and ``description``;
 - every eval case's machine-checkable expectations agree with the router (an expected
   route of ``clarify`` means the router must refuse to guess).
@@ -18,11 +19,23 @@ from pathlib import Path
 from .mdtable import backticked, parse_table, section
 from .router import RoutingError, load_router, match_route
 
-REPO_DIRS = ("agent", "skills", "examples", "docs", "src", "pi", "tests", "tools", ".github")
+REPO_DIRS = (
+    "agent",
+    "skills",
+    "examples",
+    "docs",
+    "src",
+    "pi",
+    "tests",
+    "tools",
+    "assets",
+    ".github",
+)
 SKIP_PARTS = frozenset({".git", ".venv", "venv", "node_modules", "build", "dist"})
 SKIP_TOP = frozenset({"runs"})  # raw `irh run` outputs, gitignored
 _BACKTICK = re.compile(r"`([^`\s]+)`")
 _LINK = re.compile(r"\]\(([^)\s]+)\)")
+_HTML_REF = re.compile(r"<[a-z]+\b[^>]*?\b(?:src|href)=[\"']([^\"']+)[\"']", re.IGNORECASE)
 _PLACEHOLDER = re.compile(r"[{}<>*\[\]|$]|\.\.\.|…|YYYY|MMDD")
 _TEXT_BLOCK = re.compile(r"```text\n(.*?)\n```", re.DOTALL)
 _FRONTMATTER = re.compile(r"\A---\n(.*?)\n---\n", re.DOTALL)
@@ -61,17 +74,26 @@ def _target(token: str, md: Path, root: Path, *, link: bool) -> Path | None:
     return None
 
 
+def _references(text: str) -> Iterator[tuple[int, str, bool]]:
+    """(line number, token, is_link) for every path-like reference in a markdown text."""
+    for number, line in enumerate(text.splitlines(), start=1):
+        for token in _BACKTICK.findall(line):
+            yield number, token, False
+        for token in _LINK.findall(line):
+            yield number, token, True
+    for match in _HTML_REF.finditer(text):  # HTML tags may span several lines
+        yield text.count("\n", 0, match.start(1)) + 1, match.group(1), True
+
+
 def dangling_references(root: Path) -> list[Problem]:
     problems: list[Problem] = []
     for md in markdown_files(root):
         rel = md.relative_to(root).as_posix()
-        for number, line in enumerate(md.read_text(encoding="utf-8").splitlines(), start=1):
-            refs = [(t, False) for t in _BACKTICK.findall(line)]
-            refs += [(t, True) for t in _LINK.findall(line)]
-            for token, is_link in refs:
-                target = _target(token, md, root, link=is_link)
-                if target is not None and not target.exists():
-                    problems.append(Problem(rel, number, f"dangling reference: {token}"))
+        refs = sorted(_references(md.read_text(encoding="utf-8")), key=lambda ref: ref[0])
+        for number, token, is_link in refs:
+            target = _target(token, md, root, link=is_link)
+            if target is not None and not target.exists():
+                problems.append(Problem(rel, number, f"dangling reference: {token}"))
     return problems
 
 

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="450" viewBox="0 0 1200 450" role="img" aria-labelledby="title desc">
+  <title id="title">Research Agent Harness · 一级市场投研 Agent</title>
+  <desc id="desc">以 Skill 固化研究方法，以 Python 编写流程控制层。右侧是一页虚构的研究底稿：每条断言带来源编号和信息状态。新闻与官方两类来源互证，标「核实」；只有 BP 的数字，标「待DD」；群聊截图里的融资传闻，标「市场线索待核验」并照样入池；红色 asof 线之后发布的来源不进入工作区。</desc>
+  <defs>
+    <clipPath id="paper-clip">
+      <rect x="664" y="96" width="472" height="320" rx="12"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1200" height="450" rx="24" fill="#F5F2EA"/>
+
+  <!-- masthead -->
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63" letter-spacing="1.5">
+    <text x="64" y="54">PRIMARY-MARKET RESEARCH · AGENT HARNESS</text>
+    <text x="1136" y="54" text-anchor="end">v0.1 · MIT · PYTHON 3.10+</text>
+  </g>
+  <path d="M64 72H1136" stroke="#1B1E24" stroke-width="1.5"/>
+
+  <!-- title block -->
+  <g id="title-block">
+    <g font-family="Georgia, 'Times New Roman', 'Songti SC', 'Noto Serif CJK SC', serif" font-size="62" font-weight="700" fill="#1B1E24">
+      <text x="60" y="174">Research Agent</text>
+      <text x="60" y="244">Harness</text>
+    </g>
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+      <text x="64" y="306" font-size="26" fill="#3A3F47">以 Skill 固化研究方法，</text>
+      <text x="64" y="344" font-size="26" fill="#3A3F47">以 Python 编写流程控制层。</text>
+      <text x="64" y="404" font-size="18" fill="#6E6B63">11 个 Skill · 8 道流程关口 · 4 档信息状态</text>
+    </g>
+  </g>
+
+  <!-- working-paper specimen: claim / source / status, cut at asof -->
+  <g id="working-paper" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+    <rect x="664" y="96" width="472" height="320" rx="12" fill="#FFFDF8"/>
+    <rect x="664" y="334" width="472" height="82" fill="#F6E5DF" clip-path="url(#paper-clip)"/>
+    <rect x="664" y="96" width="472" height="320" rx="12" fill="none" stroke="#D6CFC0" stroke-width="1.5"/>
+
+    <text x="688" y="127" font-size="16" fill="#6E6B63">研究底稿 · 断言 / 来源 / 信息状态（虚构示例）</text>
+    <path d="M688 140H1112" stroke="#D6CFC0" stroke-width="1.5"/>
+
+    <g id="row-verified">
+      <text x="688" y="174" font-size="21" fill="#1B1E24">星芽 完成 Pre-A 轮融资</text>
+      <text x="688" y="197" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">S-01 新闻 + S-12 官方 · 两类互证</text>
+      <rect x="1050" y="153" width="62" height="30" rx="6" fill="#1B1E24"/>
+      <text x="1081" y="174" font-size="18" font-weight="700" fill="#FFFDF8" text-anchor="middle">核实</text>
+    </g>
+
+    <g id="row-pending-dd">
+      <text x="688" y="230" font-size="21" fill="#1B1E24">星芽 月活设备 3 万台</text>
+      <text x="688" y="253" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">S-02 BP · 公司自报</text>
+      <rect x="1044" y="209" width="68" height="30" rx="6" fill="none" stroke="#1B1E24" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="1078" y="230" font-size="18" font-weight="700" fill="#1B1E24" text-anchor="middle">待DD</text>
+    </g>
+
+    <g id="row-lead">
+      <text x="688" y="286" font-size="21" fill="#1B1E24">栖语 在谈 A 轮</text>
+      <text x="688" y="309" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">S-05 群聊截图 · 带状态入池</text>
+      <rect x="958" y="265" width="154" height="30" rx="6" fill="none" stroke="#1B1E24" stroke-width="1.5" stroke-dasharray="5 4"/>
+      <text x="1035" y="286" font-size="18" font-weight="700" fill="#1B1E24" text-anchor="middle">市场线索待核验</text>
+    </g>
+
+    <g id="asof-cut">
+      <path d="M664 334H1136" stroke="#B23A2B" stroke-width="2" stroke-dasharray="9 6"/>
+      <rect x="688" y="322" width="164" height="24" rx="12" fill="#B23A2B"/>
+      <text x="770" y="339" font-size="15" fill="#FFFDF8" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">asof 2026-09-30</text>
+    </g>
+
+    <g id="row-after-asof">
+      <text x="688" y="376" font-size="21" fill="#1B1E24" fill-opacity="0.4">拾光 完成 A 轮融资</text>
+      <path d="M688 369H869" stroke="#B23A2B" stroke-width="1.5"/>
+      <text x="688" y="399" font-size="16" fill="#9A3A2D" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">S-09 · 2026-10-15 发布</text>
+      <rect x="994" y="355" width="118" height="30" rx="6" fill="none" stroke="#B23A2B" stroke-width="1.5"/>
+      <text x="1053" y="376" font-size="18" font-weight="700" fill="#B23A2B" text-anchor="middle">不进工作区</text>
+    </g>
+  </g>
+</svg>

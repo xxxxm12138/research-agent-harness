@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720" role="img" aria-labelledby="title desc">
+  <title id="title">信息状态：标签不得强于所引来源</title>
+  <desc id="desc">7 个标签分 4 档。工商变更、公告、监管披露，或新闻与官网两类公开来源互证，最高可标「核实」（已核实档）；新闻、公司官网、论文最高「公开报道」，自媒体与二手转述最高「媒体口径」（公开报道档）；群聊截图与传闻最高「市场线索待核验」，BP、创始人自述与访谈最高「待DD」，明确未披露的数字标「未公开」（待DD档）；推断标「推演」。超出上限即被 EvidenceGate 拦下。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0L10 5L0 10z" fill="#1B1E24"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="720" rx="24" fill="#F5F2EA"/>
+
+  <!-- heading -->
+  <text x="64" y="58" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63" letter-spacing="1.5">INFORMATION STATUS · 4 TIERS · 7 LABELS</text>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+    <text x="64" y="104" font-size="32" font-weight="700" fill="#1B1E24">标签不得强于所引来源</text>
+    <text x="64" y="142" font-size="20" fill="#3A3F47">每条断言按所引来源封顶：公司自报最多「待DD」；「核实」要工商记录，或两类公开来源互证。</text>
+  </g>
+
+  <!-- table frame -->
+  <path d="M64 170H1136" stroke="#1B1E24" stroke-width="1.5"/>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="18" fill="#6E6B63">
+    <text x="64" y="198">来源</text>
+    <text x="792" y="198">最高能标到</text>
+    <text x="990" y="198">档位</text>
+  </g>
+  <text x="436" y="198" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63">origin</text>
+  <path d="M64 212H1136" stroke="#D6CFC0" stroke-width="1.5"/>
+  <g stroke="#DDD6C8" stroke-width="1">
+    <path d="M64 319H1136"/><path d="M64 425H1136"/><path d="M64 577H1136"/>
+  </g>
+  <path d="M64 642H1136" stroke="#1B1E24" stroke-width="1.5"/>
+
+  <!-- sources -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="20" fill="#1B1E24">
+    <text x="64" y="252">工商变更、公告、监管披露</text>
+    <text x="64" y="298">两类公开来源互证，如新闻 + 官网</text>
+    <text x="64" y="358">新闻、公司官网、论文</text>
+    <text x="64" y="404">自媒体、二手转述</text>
+    <text x="64" y="464">群聊截图、市场传闻</text>
+    <text x="64" y="510">BP、创始人自述、访谈</text>
+    <text x="64" y="556">明确未披露的数字，如融资金额</text>
+    <text x="64" y="616">模型或分析师的推断</text>
+  </g>
+  <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63">
+    <text x="436" y="251">filing · registry</text>
+    <text x="436" y="297">news + official</text>
+    <text x="436" y="357">news · official · paper</text>
+    <text x="436" y="403">media</text>
+    <text x="436" y="463">screenshot · rumor</text>
+    <text x="436" y="509">bp · founder_claim · interview</text>
+    <text x="436" y="555">—</text>
+    <text x="436" y="615">inference</text>
+  </g>
+
+  <!-- ceilings -->
+  <g stroke="#1B1E24" stroke-width="1.5" marker-end="url(#arrow)">
+    <path d="M740 246H776"/><path d="M740 292H776"/><path d="M740 352H776"/><path d="M740 398H776"/>
+    <path d="M740 458H776"/><path d="M740 504H776"/><path d="M740 550H776"/><path d="M740 610H776"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="18" font-weight="700" text-anchor="middle">
+    <rect x="792" y="231" width="62" height="30" rx="6" fill="#1B1E24"/>
+    <text x="823" y="252" fill="#FFFDF8">核实</text>
+    <rect x="792" y="277" width="62" height="30" rx="6" fill="#1B1E24"/>
+    <text x="823" y="298" fill="#FFFDF8">核实</text>
+
+    <rect x="792" y="337" width="96" height="30" rx="6" fill="none" stroke="#1B1E24" stroke-width="1.5"/>
+    <text x="840" y="358" fill="#1B1E24">公开报道</text>
+    <rect x="792" y="383" width="96" height="30" rx="6" fill="none" stroke="#6E6B63" stroke-width="1.5"/>
+    <text x="840" y="404" fill="#3A3F47">媒体口径</text>
+
+    <rect x="792" y="443" width="154" height="30" rx="6" fill="none" stroke="#1B1E24" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="869" y="464" fill="#1B1E24">市场线索待核验</text>
+    <rect x="792" y="489" width="68" height="30" rx="6" fill="none" stroke="#1B1E24" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="826" y="510" fill="#1B1E24">待DD</text>
+    <rect x="792" y="535" width="78" height="30" rx="6" fill="none" stroke="#1B1E24" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="831" y="556" fill="#1B1E24">未公开</text>
+
+    <rect x="792" y="595" width="62" height="30" rx="6" fill="none" stroke="#6E6B63" stroke-width="1.5" stroke-dasharray="1.5 4" stroke-linecap="round"/>
+    <text x="823" y="616" fill="#6E6B63">推演</text>
+  </g>
+
+  <!-- tiers -->
+  <g fill="none" stroke="#1B1E24" stroke-width="1.5">
+    <path d="M966 228H972V306H966"/>
+    <path d="M966 334H972V412H966"/>
+    <path d="M966 440H972V564H966"/>
+    <path d="M966 594H972V626H966"/>
+  </g>
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="22" font-weight="700" fill="#1B1E24">
+    <text x="990" y="275">已核实</text>
+    <text x="990" y="381">公开报道</text>
+    <text x="990" y="510">待DD</text>
+    <text x="990" y="617">推演</text>
+  </g>
+
+  <!-- enforcement -->
+  <path d="M65 671L77 683M77 671L65 683" stroke="#B23A2B" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="92" y="684" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="18" fill="#3A3F47">超出上限即被 EvidenceGate 拦下；origin 写成 verified 只是声明，不算证据，按实际引用的来源重算。</text>
+</svg>

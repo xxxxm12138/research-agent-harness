@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="550" viewBox="0 0 1200 550" role="img" aria-labelledby="title desc">
+  <title id="title">一个任务在 harness 里怎么走</title>
+  <desc id="desc">一句话任务依次经过四步：路由（agent/router.md 按任务信号匹配 Skill、参考样本与 rubric，信号不足先问）；工作区（irh assemble 只加载该路由所需，按 asof 冻结来源，纠错记录按路由过滤）；模型（irh run 交给 Pi 执行，换模型不换 harness，底稿附 run record）；关口（irh check 与 irh score，8 道流程关口加 rubric 评分，失败回到对应检查点）。人工纠正写成带标签的规则，下次自动加载，可检查的升级为关口。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0L10 5L0 10z" fill="#1B1E24"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="550" rx="24" fill="#F5F2EA"/>
+
+  <!-- heading -->
+  <text x="64" y="58" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace" font-size="16" fill="#6E6B63" letter-spacing="1.5">HOW IT WORKS</text>
+  <text x="64" y="104" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="32" font-weight="700" fill="#1B1E24">一个任务在 harness 里怎么走</text>
+
+  <!-- input task -->
+  <g id="task" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+    <rect x="64" y="134" width="60" height="32" rx="6" fill="#1B1E24"/>
+    <text x="94" y="157" font-size="18" font-weight="700" fill="#FFFDF8" text-anchor="middle">任务</text>
+    <text x="140" y="158" font-size="21" fill="#3A3F47">“帮我做 AI 陪伴硬件赛道的 mapping，看哪些机构投了”</text>
+    <path d="M94 168V200" stroke="#1B1E24" stroke-width="1.5" marker-end="url(#arrow)"/>
+  </g>
+
+  <!-- four steps -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif">
+    <g id="step-route" transform="translate(64 206)">
+      <rect width="244" height="214" rx="12" fill="#FFFDF8" stroke="#D6CFC0" stroke-width="1.5"/>
+      <text x="20" y="34" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">01</text>
+      <text x="20" y="72" font-size="26" font-weight="700" fill="#1B1E24">路由</text>
+      <text x="20" y="102" font-size="17" fill="#5B5850" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">agent/router.md</text>
+      <text x="20" y="138" font-size="20" fill="#3A3F47">按任务信号匹配</text>
+      <text x="20" y="166" font-size="20" fill="#3A3F47">Skill、样本与 rubric</text>
+      <text x="20" y="194" font-size="20" fill="#3A3F47">信号不足先问，不猜</text>
+    </g>
+    <g id="step-workspace" transform="translate(340 206)">
+      <rect width="244" height="214" rx="12" fill="#FFFDF8" stroke="#D6CFC0" stroke-width="1.5"/>
+      <text x="20" y="34" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">02</text>
+      <text x="20" y="72" font-size="26" font-weight="700" fill="#1B1E24">工作区</text>
+      <text x="20" y="102" font-size="17" fill="#5B5850" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">irh assemble</text>
+      <text x="20" y="138" font-size="20" fill="#3A3F47">只加载该路由所需</text>
+      <text x="20" y="166" font-size="20" fill="#3A3F47"><tspan fill="#B23A2B">asof</tspan> 冻结来源</text>
+      <text x="20" y="194" font-size="20" fill="#3A3F47">纠错记录按路由过滤</text>
+    </g>
+    <g id="step-model" transform="translate(616 206)">
+      <rect width="244" height="214" rx="12" fill="#FFFDF8" stroke="#D6CFC0" stroke-width="1.5"/>
+      <text x="20" y="34" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">03</text>
+      <text x="20" y="72" font-size="26" font-weight="700" fill="#1B1E24">模型</text>
+      <text x="20" y="102" font-size="17" fill="#5B5850" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">irh run --model</text>
+      <text x="20" y="138" font-size="20" fill="#3A3F47">交给 Pi 执行</text>
+      <text x="20" y="166" font-size="20" fill="#3A3F47">换模型不换 harness</text>
+      <text x="20" y="194" font-size="20" fill="#3A3F47">底稿附 run record</text>
+    </g>
+    <g id="step-gates" transform="translate(892 206)">
+      <rect width="244" height="214" rx="12" fill="#FFFDF8" stroke="#1B1E24" stroke-width="1.5"/>
+      <text x="20" y="34" font-size="16" fill="#6E6B63" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">04</text>
+      <text x="20" y="72" font-size="26" font-weight="700" fill="#1B1E24">关口</text>
+      <text x="20" y="102" font-size="17" fill="#5B5850" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', 'DejaVu Sans Mono', monospace">irh check / score</text>
+      <text x="20" y="138" font-size="20" fill="#3A3F47">8 道流程关口</text>
+      <text x="20" y="166" font-size="20" fill="#3A3F47">rubric 评分</text>
+      <text x="20" y="194" font-size="20" fill="#B23A2B">失败回到对应检查点</text>
+    </g>
+  </g>
+
+  <!-- flow -->
+  <g stroke="#1B1E24" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+    <path d="M312 313H334"/>
+    <path d="M588 313H610"/>
+    <path d="M864 313H886"/>
+  </g>
+
+  <!-- correction loop -->
+  <path d="M1014 420V462H462V426" fill="none" stroke="#1B1E24" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+  <text x="738" y="504" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', 'Noto Sans SC', sans-serif" font-size="20" fill="#3A3F47"><tspan font-weight="700" fill="#1B1E24">纠错沉淀</tspan>：人工纠正写成带标签的规则，下次自动加载；可检查的升级为关口</text>
+</svg>
